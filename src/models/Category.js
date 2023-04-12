@@ -4,7 +4,12 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   const tableCategories = sequelize.define('Category', {
-    id: DataTypes.INTENGER,
+    id: {
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: DataTypes.INTEGER
+    },
     name: DataTypes.STRING
   }, {
     tableName: 'categories',

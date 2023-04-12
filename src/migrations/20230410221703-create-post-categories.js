@@ -25,8 +25,9 @@ module.exports = {
         },
         onDelete: 'CASCADE'
       }
-    },{
+    }, {
       underscored: true,
+      timestamps: false,
     });
 
   },

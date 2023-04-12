@@ -35,8 +35,9 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false,
       },
-    },{
+    }, {
       underscored: true,
+      timestamps: false,
     });
 
   },

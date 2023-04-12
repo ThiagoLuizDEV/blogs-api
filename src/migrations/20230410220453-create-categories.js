@@ -13,6 +13,9 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       }
+    }, {
+      underscored: true,
+      timestamps: false,
     });
   },
 
