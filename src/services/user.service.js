@@ -1,5 +1,5 @@
 const { User } = require('../models');
-const { generateToken } = require('../utils/auth');
+const { generateToken, validateToken } = require('../utils/auth');
 
 const createdUser = async ({ displayName, email, password, image }) => {
     const findEmail = await User.findOne({ where: { email } });
@@ -11,6 +11,15 @@ const createdUser = async ({ displayName, email, password, image }) => {
     return result;
 };
 
+const validateTokenUser = async (token) => {
+    validateToken(token);
+    const result = User.findAll({
+        attributes: { exclude: ['password'] },
+    });
+    return result;
+};
+
 module.exports = {
     createdUser,
+    validateTokenUser,
 };

@@ -12,11 +12,15 @@ const generateToken = (payload) => {
     return token;
 };
 
-// const validateToken = (token) => {
-//     if (!token) throw new Error('token is missing');
-//     const isValid = jwt.verify(token, secret);
-//     return isValid;
-// };
+const validateToken = (token) => {
+    if (!token) throw new Error('Token not found');
+    try {
+        const isValid = jwt.verify(token, secret);
+        return isValid;
+    } catch (error) {
+        throw new Error('Expired or invalid token');
+    }
+};
 
 // const decodeToken = (token) => {
 //     if (!token) throw new Error('token is missing');
@@ -26,6 +30,6 @@ const generateToken = (payload) => {
 
 module.exports = {
     generateToken,
-    // validateToken,
+    validateToken,
     // decodeToken,
 };

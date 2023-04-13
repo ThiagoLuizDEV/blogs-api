@@ -1,4 +1,4 @@
-const { createdUser } = require('../services/user.service');
+const { createdUser, validateTokenUser } = require('../services/user.service');
 
 const createUserController = async (req, res) => {
     try {
@@ -10,6 +10,17 @@ const createUserController = async (req, res) => {
     }
 };
 
+const verifUserToken = async (req, res) => {
+    try {
+        const { authorization } = req.headers;
+        const result = await validateTokenUser(authorization);
+        res.status(200).json(result);
+    } catch (error) {
+        return res.status(401).json({ message: error.message });
+    }
+};
+
 module.exports = {
     createUserController,
+    verifUserToken,
 };

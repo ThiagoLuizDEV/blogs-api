@@ -16,4 +16,6 @@ validationPassword,
 controllerUser.createUserController,
 );
 
+router.get('/', controllerUser.verifUserToken);
+
 module.exports = router;
