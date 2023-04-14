@@ -13,12 +13,16 @@ const generateToken = (payload) => {
 };
 
 const validateToken = (token) => {
-    if (!token) throw new Error('Token not found');
+    const error = new Error('Token not found');
+    error.status = 401;
+    if (!token) throw error;
     try {
         const isValid = jwt.verify(token, secret);
         return isValid;
-    } catch (error) {
-        throw new Error('Expired or invalid token');
+    } catch (erro) {
+        const errorExpired = new Error('Expired or invalid token');
+            errorExpired.status = 401;
+        throw errorExpired;
     }
 };
 

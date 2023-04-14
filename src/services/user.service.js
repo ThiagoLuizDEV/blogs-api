@@ -19,7 +19,20 @@ const validateTokenUser = async (token) => {
     return result;
 };
 
+const validateUserId = async (id, token) => {
+    validateToken(token);
+    const findUser = await User.findOne({
+        where: { id },
+        attributes: { exclude: ['password'] },
+    });
+    const error = new Error('User does not exist');
+    error.status = 404;
+    if (!findUser) throw error;
+    return findUser;
+};
+
 module.exports = {
     createdUser,
     validateTokenUser,
+    validateUserId,
 };

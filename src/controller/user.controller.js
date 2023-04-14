@@ -1,4 +1,4 @@
-const { createdUser, validateTokenUser } = require('../services/user.service');
+const { createdUser, validateTokenUser, validateUserId } = require('../services/user.service');
 
 const createUserController = async (req, res) => {
     try {
@@ -20,7 +20,18 @@ const verifUserToken = async (req, res) => {
     }
 };
 
+const getUserById = async (req, res) => {
+try {
+    const { authorization } = req.headers;
+    const { id } = req.params;
+    const result = await validateUserId(+id, authorization);
+    res.status(200).json(result);
+} catch (error) {
+    if (error.status) return res.status(error.status).json({ message: error.message });
+}
+};
 module.exports = {
     createUserController,
     verifUserToken,
+    getUserById,
 };
