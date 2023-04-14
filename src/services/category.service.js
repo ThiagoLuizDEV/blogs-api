@@ -7,6 +7,15 @@ const categoryCreated = async (name, authorization) => {
     return createCategory;
 };
 
+const findAllCategory = async (authorization) => {
+    validateToken(authorization);
+    const result = await Category.findAll({
+        attributes: ['id', 'name'],
+    });
+    return result;
+};
+
 module.exports = {
     categoryCreated,
+    findAllCategory,
 };
